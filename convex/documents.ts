@@ -14,7 +14,6 @@ export const getDocuments = query({
         return await ctx.db.query('documents')
             .withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', userId))
             .collect()
-
     }
 })
 

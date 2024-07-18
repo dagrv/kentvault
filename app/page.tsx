@@ -4,6 +4,8 @@ import { api } from "@/convex/_generated/api";
 import { SignInButton, UserButton } from "@clerk/nextjs";
 import { Authenticated, Unauthenticated, useMutation, useQuery } from "convex/react";
 import { createDocument } from '../convex/documents';
+import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/mode-toggle";
 
 
 export default function Home() {
@@ -13,17 +15,17 @@ export default function Home() {
 	return (
 		<main className="flex min-h-screen flex-col items-center justify-between p-24">
 			<Unauthenticated>
-				<div className="bg-sky-600 p-2 rounded-md">
-					<SignInButton />
-				</div>
-				
+				<SignInButton />
 			</Unauthenticated>
+			
 			<Authenticated>
 				<UserButton />
 
-				<button onClick={() => {
+				<ModeToggle/>
+
+				<Button onClick={() => {
 					createDocument({title: 'hello'})
-				}} className="bg-sky-500 p-2 rounded-lg w-full">Click here</button>
+				}}>Click here</Button>
 
 				{documents?.map((doc) => (
 					<div key={doc._id}>{doc.title}</div>
